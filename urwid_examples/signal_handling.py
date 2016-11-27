@@ -11,9 +11,6 @@ pallete = [
     ];
 question_asked = urwid.Edit( ("I say", "What's your name?\n") );
 question_reply = urwid.Text("0");
-#question_reply = urwid.Text( [("I nay", "Mesa "), ( "I say", "reply.")] );
-#question_reply = urwid.Text( ("I say", "Mesa reply.") );
-#question_reply = urwid.Text( "Mesa reply.");
 region_divider = urwid.Divider("-");
 testText = urwid.Text("Mesa test.");
 
@@ -35,16 +32,6 @@ def exit_on_click(button):
 
 def on_change(edit, new_text):
     question_reply.set_text("Nice to meet you, {:s}".format(new_text) );
-
-# Counts the number of total changes made to an edit box.
-#def on_change(edit, new_text):
-    #if question_reply.get_text()[0] == "":
-        #question_reply.set_text("1");
-    #else:
-        #question_reply.set_text( str( int( question_reply.get_text()[0] ) + 1 ) );
-
-#def on_change(edit, new_text):
-    #testText.set_text( str(question_reply.get_text()) );
 
 urwid.connect_signal( button, 'click', exit_on_click );
 urwid.connect_signal( question_asked, 'change', on_change);

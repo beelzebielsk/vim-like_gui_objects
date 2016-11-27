@@ -17,7 +17,7 @@ pallete = [
 mainPile = urwid.Pile([]);
 container = urwid.Filler( mainPile, valign='top' );
 divider = urwid.Divider('-');
- 
+
 topPile = urwid.Pile([]);
 bottomPile = urwid.Pile([]);
 

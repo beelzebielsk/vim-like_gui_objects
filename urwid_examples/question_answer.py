@@ -13,8 +13,8 @@ class QuestionBox(urwid.Filler):
 
     # Defines (overrrides, actually) a function 'keypress' for
     # all QuestionBox objects, which accepts the arguments 'size'
-    # and 'key' (self is automatic, kinda).
-    # What is size used for?
+    # and 'key'.
+    # TODO: What is size used for?
     def keypress(self, size, key):
         if key != 'enter':
             # If the key is not enter, then call the keypress
