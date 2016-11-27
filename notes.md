@@ -45,20 +45,42 @@ You can separate mappings from controls using this.
 
 # Good Vim Stuff To Include
 
-- Numbers before commands
 - Modes (insert, normal)
   - Optionally visual, for copying the contents of certain boxes.
   - Consider defining a 'yield' for these boxes which controls how
 	things come out of the boxes for copying and pasting.
+- Numbers before commands
+- Maybe ex commands for stuff that I don't want to map keys to, such as
+	quitting. Quitting only happens once per run of a program.
+- Sequences of keys for commands.
+
+# For Keeping It General
+
+Widgets layouts probably won't change on the fly-- at least not the
+major container widgets. Syncing up the controls of the wrapper with the
+container widget should happen once per program, which isn't so bad.
+
+To link the command map of the wrapper with the command map of the
+inside part, I can create a reverse table of the command_map of the
+contained widget, then emit whatever key works for the command for the
+contained widget.
+
+I'm not sure what I'd do to put new commands inside of a widget which
+doesn't have those commands, such as:
+
+- Move to topmost visible (`H`).
+- Move to bottommost visible (`L`).
+- Move to first widget (`gg`)
+- Move to last widget (`G`)
 
 # TODO
 
-- How do you hand down a specific command to contained widgets, rather
-	than a key? What if I just want to do 'cursor down' or 'cursor up', no
-	matter what key that's assigned to?
-- Can I keep the wrapper general, or do I have to force the wrapper to
-	be a decoration widget instead, like columns, or piles/listboxes, or
-	grid flow?
+- Figure out how to deal with key sequences for a command. Is necessary
+	for number prefixes to a command.
+	- If number, keep waiting, I guess indefinitely.
+	- If letter(s), check to see if it's a prefix of more than one valid
+		command. If it is, then wait for a *set amount of time* to force
+		evaluation of the command string as-is.
 - What should it do if it contains no selectable widgets?
 - Check the way that urwid widgets tend to handle unhandled keys:
   - When do they call super methods?
