@@ -11,6 +11,10 @@
   sent to the in focus element from there. The in focus element is
   supposed to, from there, handle the key, or return it back so that the
   pile can process it.
+- Piles can't handle page up and page down.
+- Piles don't seem to allow you to change focus if there are no
+	selectables in the pile. At the very least, they don't allow for
+	scrolling unless there are some selectables.
 
 # Command Maps
 
@@ -49,9 +53,13 @@ You can separate mappings from controls using this.
 
 # TODO
 
-- Read up on the global command table of urwid. See if you can link that
-  to the vim command thing that you've got going on, and see if it's
-  possible to change it at all, or that would be wise.
+- How do you hand down a specific command to contained widgets, rather
+	than a key? What if I just want to do 'cursor down' or 'cursor up', no
+	matter what key that's assigned to?
+- Can I keep the wrapper general, or do I have to force the wrapper to
+	be a decoration widget instead, like columns, or piles/listboxes, or
+	grid flow?
+- What should it do if it contains no selectable widgets?
 - Check the way that urwid widgets tend to handle unhandled keys:
   - When do they call super methods?
 	- I think the `super` methods is specifically for when you've
