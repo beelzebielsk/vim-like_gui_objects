@@ -54,7 +54,9 @@ You can separate mappings from controls using this.
 	quitting. Quitting only happens once per run of a program.
 - Sequences of keys for commands.
 
-# For Keeping It General
+# How to Implement?
+
+## For Keeping It General
 
 Widgets layouts probably won't change on the fly-- at least not the
 major container widgets. Syncing up the controls of the wrapper with the
@@ -72,6 +74,35 @@ doesn't have those commands, such as:
 - Move to bottommost visible (`L`).
 - Move to first widget (`gg`)
 - Move to last widget (`G`)
+
+## For Designing Custom Widgets
+
+I'd know exactly which key does what, I wouldn't have to figure out this
+puzzle of figuring out which key to transmit to the underlying container
+widgets because I'd be using my own container widgets.
+
+## Designing an Interface Instead
+
+Rather than trying to conform to everything possible, I can specify some
+things about how to move around, and what functions it can perform for
+widgets. Designers of widgets, such as myself, other users of urwid or
+the urwid creator could then design their widgets in such a way as to
+work with the interface that I specify.
+
+Maybe the widgets can have a method for passing up keybindings.
+
+However, the reverse command map seems to be the most promising method,
+currently. The 'interface' specified here could just be specifying the
+different kinds of available commands, and what their names would be.
+This way, widgets could offer them up in their command maps so that they
+could be accessed by the normal mode of the wrapped widget.
+
+That being said, if I create a crapton of navigation things that I'd
+want, it might be wasteful to bind keys to these things in the normal
+operation. A fair number of widgets might not be able to handle all the
+extra keybindings, making their use in insert mode bad. So also consider
+creating a way to accept callbacks that will get fired off when a
+certain command is given.
 
 # TODO
 
@@ -91,3 +122,12 @@ doesn't have those commands, such as:
 	- This is probably for when the current widget completely does not
 	  handle the key in any way: neither it, nor any class from which it
 	  inherits.
+- Stretch goals
+	- Half page-down
+	-	Half page-up
+	- Top of page `H`
+	- Bottom of page `L`
+	- Figure out how to keep normal mode navigation strictly for
+		navigating containers, not for moving the cursor around in a box
+		(like for Edit).
+
